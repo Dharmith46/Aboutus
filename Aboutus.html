@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Aligned</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4faff;
+        color: #333;
+      }
+      .header {
+        background: white;
+        color: blue;
+        padding: 10px 0;
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+        transition: background 0.3s ease, color 0.3s ease; /* Smooth transition */
+      }
+      .header.scrolled {
+        background: #fff; /* Solid background after scrolling */
+        color: #333;
+      }
+      .header .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px; /* Maximum width for large screens */
+        width: 100%;
+        margin: 0 auto; /* Center container */
+        max-width: 1200px; /* Maximum width for large screens */
+      }
+      .header .logo {
+        font-size: 2em;
+        font-weight: bold;
+      }
+      .nav {
+        display: flex;
+        justify-content: right;
+        flex: 1;
+      }
+      .nav a {
+        color: black;
+        text-decoration: none;
+        padding: 10px 15px;
+        margin: 0 5px;
+        border-radius: 5px;
+      }
+      .nav a:hover,
+      .nav a.active {
+        background: rgb(236, 232, 232);
+      }
+      .auth {
+        display: flex;
+      }
+      .auth a {
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 15px;
+        margin: 0 5px;
+        border-radius: 5px;
+        background: #0073e6;
+      }
+      .auth a:hover {
+        background: #005bb5;
+      }
+      .page-header {
+        position: relative; /* Relative positioning to contain absolutely positioned elements */
+
+        text-align: center;
+        padding: 200px 10px;
+        background: #00030a;
+        color: #fff;
+        background-image: url("images/header.jpg");
+        background-size: cover;
+        background-position: center;
+      }
+      .page-header h1 {
+        position: absolute; /* Absolute positioning */
+        top: 60%; /* Adjust vertical position */
+        left: 50%; /* Adjust horizontal position */
+        transform: translate(
+          -50%,
+          -50%
+        ); /* Center text by offsetting half of its own width and height */
+        margin: 0px; /* Remove default margin */
+        font-size: 5em; /* Adjust font size as needed */
+      }
+      .container {
+        width: 90%; /* Adjusted width to fit smaller screens */
+        max-width: 1200px; /* Maximum width for larger screens */
+        margin: auto;
+        overflow: hidden;
+      }
+      .section {
+        padding: 20px 0;
+      }
+      .section h2 {
+        color: #0044cc;
+        margin-bottom: 10px;
+      }
+      .section p {
+        line-height: 1.6;
+      }
+      .team {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+      }
+      .team-member {
+        flex: 1 1 calc(33.333% - 20px); /* Three columns layout with spacing */
+        background: #fff;
+        margin: 10px;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      .team-member img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+      }
+      .mission {
+        display: flex;
+        align-items: center;
+        background: #fff;
+        border-radius: 30px;
+        padding: 50px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin: 20px 0;
+      }
+      .mission .text {
+        flex: 1;
+        padding-right: 20px;
+      }
+      .mission .image{
+        flex: 1;
+        text-align: right;
+      }
+      .mission .image img{
+        flex: 1;
+        width: 500px;
+        height: 400px;
+        border-radius: 50px;
+        float: right;
+        margin-right: 10px;
+      }
+      .values {
+        background: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+      .contact-form {
+        background: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+      .contact-form h3 {
+        margin-top: 0;
+      }
+      .contact-form input,
+      .contact-form textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+      .contact-form button {
+        background: #0044cc;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .contact-form button:hover {
+        background: #003399;
+      }
+      footer {
+        background: #0044cc;
+        color: #fff;
+        text-align: center;
+        padding: 10px 0;
+        margin-top: 20px;
+      }
+
+      @media (max-width: 768px) {
+        .header .container {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .nav,
+        .auth {
+          width: 100%;
+          justify-content: space-between;
+          margin-top: 10px;
+        }
+        .nav a,
+        .auth a {
+          margin: 0;
+          padding: 10px;
+        }
+        .team-member {
+          flex: 1 1 100%; /* Single column on small screens */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="container">
+        <div class="logo">Aligned</div>
+        <div class="nav">
+          <a href="#">Home</a>
+          <a href="#">Employer</a>
+          <a href="#">Candidate</a>
+          <a href="#">About</a>
+          <a href="#">Contact</a>
+        </div>
+        <div class="auth">
+          <a href="#">Login</a>
+          <a href="#">Register</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-header">
+      <h1>About Us</h1>
+    </div>
+
+    <div class="container">
+      <div class="mission">
+        <div class="text">
+        <h2>Our Mission</h2>
+        <p>
+          At <b>ALIGNED</b>, our mission begins with
+          <b>Re-Inventing Recruitment</b>. We are driven by a vision to
+          transform the traditional hiring landscape into a dynamic,
+          transparent, and highly efficient experience. Our innovative platform
+          leverages advanced technology and data-driven insights to bridge the
+          gap between top talent and forward-thinking organizations. We are
+          committed to creating a seamless recruitment journey that not only
+          aligns with the strategic goals of businesses but also resonates with
+          the career aspirations of job seekers. By prioritizing
+          personalization, clarity, and efficiency, Aligned aims to set new
+          standards in recruitment, fostering meaningful connections and
+          empowering both employers and candidates to achieve their full
+          potential. Through our commitment to excellence and continuous
+          improvement, we strive to be the catalyst for a more integrated and
+          forward-looking employment ecosystem.
+        </p>
+    </div>
+    <div class="image">
+        <img src="images/mission.jpg" alt="Our Mission Image">
+    </div>
+</div>
+</div>
+      </section>
+
+      <section class="section values">
+        <h2>Our Values</h2>
+        <p>
+          We value integrity, transparency, and dedication to excellence in
+          every aspect of our work. We strive to create a platform that fosters
+          trust and reliability.
+        </p>
+      </section>
+
+      <section class="section team">
+        <h2>Meet Our Team</h2>
+        <div class="team-member">
+          <img src="https://via.placeholder.com/100" alt="Team Member" />
+          <h3>Jane Doe</h3>
+          <p>CEO</p>
+        </div>
+        <div class="team-member">
+          <img src="https://via.placeholder.com/100" alt="Team Member" />
+          <h3>John Smith</h3>
+          <p>CTO</p>
+        </div>
+        <div class="team-member">
+          <img src="https://via.placeholder.com/100" alt="Team Member" />
+          <h3>Emily Johnson</h3>
+          <p>COO</p>
+        </div>
+      </section>
+
+      <section class="section contact-form">
+        <h3>Contact Us</h3>
+        <form id="contactForm">
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Your Name"
+            required
+          />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Your Email"
+            required
+          />
+          <textarea
+            id="message"
+            name="message"
+            rows="4"
+            placeholder="Your Message"
+            required
+          ></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </section>
+    </div>
+
+    <footer>
+      <p>&copy; 2024 Recruiting Platform. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+          const message = document.getElementById("message").value;
+          if (name && email && message) {
+            alert(
+              "Thank you for your message, " +
+                name +
+                ". We will get back to you soon!"
+            );
+            document.getElementById("contactForm").reset();
+          } else {
+            alert("Please fill out all fields.");
+          }
+        });
+    </script>
+
+    <script>
+      // Function to handle scroll event and toggle header background
+      function handleScroll() {
+        const header = document.querySelector(".header");
+        if (window.scrollY > 50) {
+          // Adjust scroll value as needed
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+      }
+
+      // Listen to the scroll event
+      window.addEventListener("scroll", handleScroll);
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const navLinks = document.querySelectorAll(".nav a");
+        const currentPage = window.location.pathname.split("/").pop();
+
+        navLinks.forEach((link) => {
+          if (link.getAttribute("href") === currentPage) {
+            link.classList.add("active");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
